@@ -21,13 +21,14 @@ const SearchBar = ({ onSearch, suggestions = [] }) => {
   ).slice(0, 5);
 
   const containerStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    margin: '20px',
+    // margin:'20px',
+    paddingLeft: '20px',
+    marginBottom: '20px',
+    paddingRight:'50px',
+
   };
   const wrapperStyle = {
-    width: '1200px',
+    width: '95%',
     position: 'relative',
   };
   const iconStyle = {

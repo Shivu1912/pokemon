@@ -11,11 +11,10 @@ const HomeScreen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 20;
 
-  // Fetch Pokémon names and then fetch their details
   useEffect(() => {
     const fetchPokemon = async () => {
       try {
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=200'); // Increase the limit to fetch 100 Pokémon for pagination
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=200');
         const data = await res.json();
 
         const names = data.results.map(p => p.name);
@@ -46,7 +45,6 @@ const HomeScreen = () => {
     fetchPokemon();
   }, []);
 
-  // Handle search from SearchBar
   const handleSearch = (name) => {
     const lowerName = name.toLowerCase();
     if (allPokemonNames.includes(lowerName)) {
@@ -62,24 +60,21 @@ const HomeScreen = () => {
     }
   };
 
-  // Calculate Pokémon to display for the current page
   const indexOfLastPokemon = currentPage * itemsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - itemsPerPage;
   const currentPokemon = pokemonData.slice(indexOfFirstPokemon, indexOfLastPokemon);
-
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div style={{ backgroundColor: 'red', height: '80%', width: '100%', paddingTop: 40, paddingBottom: 10 }}>
-      <div style={{ display: 'flex', gap: '50px', paddingLeft: 60 }}>
-        <img src="/logo.png" alt="Logo" style={{ borderRadius: '60%', height: '100px', width: '100px' }} />
-        <div style={{ color: 'white', fontSize: '80px', fontWeight: 'bolder' }}>Pokédex</div>
+    <div style={styles.container}>
+      <div style={styles.header}>
+        <img src="/logo.png" alt="Logo" style={styles.logo} />
+        <div style={styles.title}>Pokédex</div>
       </div>
 
       <SearchBar onSearch={handleSearch} suggestions={allPokemonNames} />
 
-      {error && <p style={{ color: 'yellow', fontWeight: 'bold' }}>{error}</p>}
+      {error && <p style={styles.error}>{error}</p>}
 
       {loading ? (
         <Loader />
@@ -87,19 +82,18 @@ const HomeScreen = () => {
         <>
           <PokemonList pokemon={currentPokemon} />
 
-          {/* Pagination Controls */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+          <div style={styles.pagination}>
             <button
               onClick={() => paginate(currentPage - 1)}
               disabled={currentPage === 1}
-              style={{ padding: '10px 20px', marginRight: '10px' }}
+              style={styles.button}
             >
               Previous
             </button>
             <button
               onClick={() => paginate(currentPage + 1)}
               disabled={currentPage * itemsPerPage >= pokemonData.length}
-              style={{ padding: '10px 20px' }}
+              style={styles.button}
             >
               Next
             </button>
@@ -108,6 +102,55 @@ const HomeScreen = () => {
       )}
     </div>
   );
+};
+
+const styles = {
+  container: {
+    backgroundColor: 'red',
+    padding: '30px 20px 10px',
+    minHeight: '100vh',
+    boxSizing: 'border-box',
+    overflowX: 'hidden',
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '20px',
+    justifyContent: 'left',
+    marginBottom: '20px',
+    paddingLeft: '10px',
+  },
+  logo: {
+    borderRadius: '60%',
+    height: '80px',
+    width: '80px',
+  },
+  title: {
+    color: 'white',
+    fontSize: '60px',
+    fontWeight: 'bolder',
+    textAlign: 'left',
+  },
+  error: {
+    color: 'yellow',
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  pagination: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: '20px',
+    flexWrap: 'wrap',
+    gap: '10px',
+  },
+  button: {
+    padding: '10px 20px',
+    fontSize: '16px',
+    borderRadius: '8px',
+    border: 'none',
+    backgroundColor: '#fff',
+    cursor: 'pointer',
+  },
 };
 
 export default HomeScreen;

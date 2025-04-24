@@ -47,8 +47,8 @@ const PokemonDetail = () => {
   const bgColor = typeColors[types[0]?.type?.name.toLowerCase()];
 
   const currentId = parseInt(id, 10);
-  const nextId = currentId + 1; 
-const previousId = currentId - 1; // Subtract 1 to get the previous Pokémon ID
+//   const nextId = currentId + 1; 
+// const previousId = currentId - 1; // Subtract 1 to get the previous Pokémon ID
 
 const handlePreviousClick = async () => {
   const prevId = currentId - 1; // Calculate previous Pokémon ID
@@ -75,7 +75,7 @@ const handlePreviousClick = async () => {
   
 
   return (
-    <div style={{ fontFamily: 'Arial', backgroundColor: bgColor, minHeight: '100vh', paddingBottom: '20px' }}>
+    <div style={{ fontFamily: 'Arial', backgroundColor: bgColor, minHeight: '100vh', paddingBottom: '5px' }}>
 
       <div style={{ display: 'flex', alignItems: 'center', padding: '20px' }}>
         <button onClick={() => navigate('/home')} style={{ fontSize: '50px', background: 'none', border: 'none',color:'white',fontWeight: 'bold', cursor: 'pointer' }}>←</button>
