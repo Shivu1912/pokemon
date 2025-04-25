@@ -149,7 +149,7 @@ const handlePreviousClick = async () => {
 
         <div style={{ display: 'flex', justifyContent: 'space-around', padding: '10px 0' }}>
           <div style={{ textAlign: 'center' }}>
-            <div>⚖️</div>
+          <div><span role="img" aria-label="balance scale">⚖️</span></div>
             <div>{(weight / 10).toFixed(1)} kg</div>
             <small>Weight</small>
           </div>
@@ -157,7 +157,8 @@ const handlePreviousClick = async () => {
           <div style={{ width: '1px', height: '60px', backgroundColor: '#ccc' }}></div>
 
           <div style={{ textAlign: 'center' }}>
-            <div>📏</div>
+          <div><span role="img" aria-label="ruler">📏</span></div>
+          <div>{(height / 10).toFixed(1)} m</div>
             <div>{(height / 10).toFixed(1)} m</div>
             <small>Height</small>
           </div>
@@ -165,7 +166,7 @@ const handlePreviousClick = async () => {
           <div style={{ width: '1px', height: '60px', backgroundColor: '#ccc' }}></div>
 
           <div style={{ textAlign: 'center' }}>
-            <div>✨</div>
+          <div><span role="img" aria-label="sparkles">✨</span></div>
             <div>{abilities.map(ab => ab.ability.name).join(', ')}</div>
             <small>Moves</small>
           </div>
